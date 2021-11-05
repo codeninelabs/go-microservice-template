@@ -1,100 +1,20 @@
 syntax = "proto3";
 
-package us_states;
-option go_package = "./proto;us_states";
+package service;
+option go_package = "./proto;service";
 
-// The greeting service definition.
-service USStates {
-  rpc City (CityRequest) returns (CityDetailReply) {}
-  rpc CitiesByState (StatesRequest) returns (CityReply) {}
-  rpc CitiesByCounty (CountyRequest) returns (CityReply) {}
-  rpc CitiesByPopulation (PopulationRequest) returns (CityReply) {}
-  rpc CitiesByTimeZone (TimeZoneRequest) returns (CityReply) {}
-  rpc CitiesByZips (ZipsRequest) returns (CityReply) {}
-
-  rpc State (StateRequest) returns (StateDetailReply) {}
-  rpc StatesByCity (CitiesRequest) returns (StateReply) {}
-  rpc StatesByCounty (CountyRequest) returns (StateReply) {}
-  rpc StatesByTimeZone (TimeZoneRequest) returns (StateReply) {}
-  rpc StatesByZips (ZipsRequest) returns (StateReply) {}
-
-  rpc ZipsByCity (CitiesRequest) returns (ZipReply) {}
-  rpc ZipsByCounty (CountyRequest) returns (ZipReply) {}
-  rpc ZipsByState (StatesRequest) returns (ZipReply) {}
-  rpc ZipsByTimeZone (TimeZoneRequest) returns (ZipReply) {}
+// the service definition.
+service Service {
+  rpc Call (Request) returns (Reply) {}
 }
 
-message USCity {
-  int64 Id = 1;
-  string City = 2;
-}
-message USCityDetail {
-  int64 Id = 1;
-  string City = 2;
-  string CityAscii = 3;
-  string StateAbbr = 4;
-  string State = 5;
-  uint32 CountyFips = 6;
-  string County = 7;
-  float Latitude = 8;
-  float Longitude = 9;
-  uint32 Population = 10;
-  uint32 Density = 11;
-  bool Military = 12;
-  bool Incorporated = 13;
-  string TimeZone = 14;
-  repeated uint32 Zips = 15;
+message CustomMessage {
+  string Name = 1;
 }
 
-message USState {
-  string StateAbbr = 4;
-  string State = 5;
+message Request {
+  string message = 1;
 }
-message USStateDetail {
-  string StateAbbr = 1;
-  string State = 2;
-  repeated string Cities = 3;
-  repeated uint32 Zips = 4;
-}
-
-message PopulationRequest {
-  uint32 min = 1;
-  uint32 max = 2;
-}
-message ZipsRequest {
-  repeated uint32 zips = 1;
-}
-message TimeZoneRequest {
-  string timeZone = 1;
-}
-message CitiesRequest {
-  string city = 1;
-}
-message CityRequest {
-  uint32 city = 1;
-}
-message StatesRequest {
-  string state = 1;
-}
-message StateRequest {
-  uint32 state = 1;
-}
-message CountyRequest {
-  string county = 1;
-}
-
-message StateReply {
-  repeated USState states = 1;
-}
-message StateDetailReply {
-  USStateDetail state = 1;
-}
-message CityReply {
-  repeated USCity cities = 1;
-}
-message CityDetailReply {
-  USCityDetail city = 1;
-}
-message ZipReply {
-  repeated uint32 zips = 1;
+message Reply {
+  string message = 1;
 }
